@@ -1,0 +1,6 @@
+[template]
+ src   = "clock.tmpl"
+ dest  = "/etc/sysconfig/clock"
+ keys = [
+  "/time/zone"
+ ]

@@ -1,0 +1,6 @@
+[template]
+ src   = "proxy.conf.tmpl"
+ dest  = "/etc/awslogs/proxy.conf"
+ keys = [
+  "/proxy/url"
+ ]

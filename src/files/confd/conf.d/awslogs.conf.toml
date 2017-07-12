@@ -1,0 +1,7 @@
+[template]
+ src   = "awslogs.conf.tmpl"
+ dest  = "/etc/awslogs/awslogs.conf"
+ keys = [
+  "/stack/name",
+  "/autoscaling/group"
+ ]

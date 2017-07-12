@@ -1,0 +1,7 @@
+[template]
+ src   = "docker.tmpl"
+ dest  = "/etc/sysconfig/docker"
+ keys = [
+  "/docker/network/mode",
+  "/proxy/url"
+ ]

@@ -1,0 +1,7 @@
+[template]
+ src   = "ecs.config.tmpl"
+ dest  = "/etc/ecs/ecs.config"
+ keys = [
+  "/ecs/cluster",
+  "/proxy/url"
+ ]

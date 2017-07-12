@@ -1,0 +1,14 @@
+[template]
+ src   = "packer.json.tmpl"
+ dest  = "/packer/packer.json"
+ keys = [
+  "/ami/name",
+  "/ami/users",
+  "/ami/regions",
+  "/app/version",
+  "/aws/default/region",
+  "/aws/source/ami",
+  "/aws/instance/type",
+  "/aws/ssh/username",
+  "/aws/security/group/id"
+ ]

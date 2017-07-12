@@ -1,0 +1,6 @@
+[template]
+ src   = "awscli.conf.tmpl"
+ dest  = "/etc/awslogs/awscli.conf"
+ keys = [
+  "/aws/default/region"
+ ]
