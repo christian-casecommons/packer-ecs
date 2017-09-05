@@ -2,20 +2,20 @@
 export PROJECT_NAME ?= packer
 
 # AWS security settings
-AWS_ROLE ?= arn:aws:iam::429614120872:role/remoteAdmin
+AWS_ROLE ?= arn:aws:iam::334274607422:role/admin
 AWS_SG_NAME ?= packer-$(firstword $(subst /, ,$(MY_IP_ADDRESS)))-$(TIMESTAMP)
 AWS_SG_DESCRIPTION ?= "Temporary security group for Packer"
 
 # Packer settings
 export PACKER_VERSION ?= 0.12.3
 export AMI_NAME ?= Casecommons ECS Base Image
-export AMI_USERS ?= 
-export AMI_REGIONS ?= 
+export AMI_USERS ?=
+export AMI_REGIONS ?=
 export APP_VERSION ?= $(TIMESTAMP).$(COMMIT_ID)
 export AWS_INSTANCE_TYPE ?= t2.micro
-export AWS_DEFAULT_REGION ?= us-west-2
+export AWS_DEFAULT_REGION ?= us-east-1
 export AWS_SSH_USERNAME ?= ec2-user
-export AWS_SOURCE_AMI ?= ami-62d35c02
+export AWS_SOURCE_AMI ?= ami-04351e12
 
 # Common settings
 include Makefile.settings
@@ -39,7 +39,7 @@ release:
 	@ rm -rf build
 	@ mkdir -p build
 	@ docker cp $$(docker-compose $(RELEASE_ARGS) ps -q packer):/packer/manifest.json build/
-	@ docker cp $$(docker-compose $(RELEASE_ARGS) ps -q packer):/packer/build.log build/ 
+	@ docker cp $$(docker-compose $(RELEASE_ARGS) ps -q packer):/packer/build.log build/
 	@ $(call transform_manifest,build/manifest.json,build/images.json)
 	@ ${INFO} "Build complete"
 
@@ -52,7 +52,7 @@ template:
 	@ ${INFO} "Template complete"
 
 # Cleans environment
-clean: 
+clean:
 	${INFO} "Destroying release environment..."
 	@ docker-compose $(RELEASE_ARGS) down -v 2>/dev/null || true
 	${INFO} "Removing dangling images..."

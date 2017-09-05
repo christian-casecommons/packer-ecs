@@ -1,6 +1,6 @@
 # Casecommons ECS Base Image
 
-This image is a derivative of the Amazon ECS-optimised AMI (currently version 2016.09.g). 
+This image is a derivative of the Amazon ECS-optimised AMI (currently version 2016.09.g).
 
 It adds the following modifications at build time:
 
@@ -12,7 +12,7 @@ It adds the following modifications at build time:
 
 ## Building the Image
 
-To build the image you must first ensure your AWS security configuration is in place and your environment configured correctly.  
+To build the image you must first ensure your AWS security configuration is in place and your environment configured correctly.
 
 This image currently only supports assume role operation, meaning your AWS security configuration must support assuming the role specified via the `AWS_ROLE` setting defined in the [`Makefile`](./Makefile).
 
@@ -195,14 +195,21 @@ AutoscalingLaunchConfiguration:
               PAUSE_TIME: 60
             cwd: "/home/ec2-user/"
   Properties:
-    UserData: 
-      Fn::Base64: 
+    UserData:
+      Fn::Base64:
         Fn::Join: ["\n", [
           "#!/bin/bash",
           "Fn::Sub": "/opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource AutoscalingLaunchConfiguration --region ${AWS::Region} --http-proxy ${MyVpcProxyURL} --https-proxy ${MyVpcProxyURL}"
           "Fn::Sub": "/opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource Autoscaling --region ${AWS::Region} --http-proxy ${MyVpcProxyURL} --https-proxy ${MyVpcProxyURL}"
       ] ]
 ```
+
+## Release Notes
+
+### Version 0.1.0
+
+- **NEW FEATURE** : Updated makefile for cbp-dev
+- **NEW FEATURE** : Added 169.254.170.2 as detailed here http://docs.aws.amazon.com/AmazonECS/latest/developerguide/http_proxy_config.html due to tcp_denied issues with proxy
 
 ## License
 
